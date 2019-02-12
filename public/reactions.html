@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Emoji Feedback Reactions</title>
+    <script defer src="/__/firebase/5.5.8/firebase-app.js"></script>
+    <script defer src="/__/firebase/5.5.8/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <style>
+      body {
+        background: transparent;
+        font-size: 10px;
+        text-align: center;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      #emoji-container {
+        position: absolute;
+        font-size: 2.2rem;
+        bottom: 0;
+        right: 3rem;
+      }
+      .emoji-outer{
+        animation-name: upwards;
+        animation-duration: 5s;
+        animation-timing-function: ease-in;
+        animation-direction: normal;
+        will-change: transform, opacity;
+        position: absolute;
+        bottom: -1.5em;
+        right: 0;
+      }
+      .emoji-inner {
+        animation-name: leftRight;
+        animation-duration: 1.5s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        will-change: transform;
+      }
+      .emoji-content {
+        font-size: 1.2em;
+      }
+      .emoji-content:after {
+        content: attr(data-emoji) " ";
+      }
+      @keyframes leftRight1 {
+        to { transform: translatex(-2vw); }
+      }
+      @keyframes leftRight2 {
+        to { transform: translatex(-3vw); }
+      }
+      @keyframes leftRight3 {
+        to { transform: translatex(-4vw); }
+      }
+      @keyframes leftRight4 {
+        to { transform: translatex(-5vw); }
+      }
+      @keyframes upwards {
+        to   { transform: translatey(-100vh); }
+        80%  { opacity: 1; }
+        100% { opacity: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="emoji-container"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Create emoji containers
+        var emojiCount = 0;
+        var emojiLimit = 100;
+        var emojiContainer = document.getElementById('emoji-container');
+        var emojiElements;
+        var emojiElement;
+        var emojiOuter;
+        var emojiInner;
+        var emojiContent;
+        var speedVertical;
+        var speedHorizontal;
+        var distanceHorizontal;
+        while (emojiCount < emojiLimit) {
+          // Create empty containers for vertical/horizontal animation and nest them
+          emojiOuter = document.createElement('div');
+          emojiInner = document.createElement('div');
+          emojiContent = document.createElement('div');
+          emojiOuter.className = 'emoji-outer';
+          emojiInner.className = 'emoji-inner';
+          emojiContent.className = 'emoji-content';
+          emojiOuter.appendChild(emojiInner);
+          emojiInner.appendChild(emojiContent);
+          // Pause animation, and listen for when the animation ends
+          emojiOuter.style.animation = 'none';
+          emojiOuter.classList.add('paused');
+          emojiOuter.addEventListener('webkitAnimationEnd', resetEmoji);
+          // Add nested divs to container
+          emojiContainer.appendChild(emojiOuter);
+          // Rinse'n'repeat
+          emojiCount++;
+        }
+        // Do stuff on button press
+        function setEmoji(element, emoji) {
+          // Make this element unavailable for use
+          element.classList.remove('paused');
+          // Reset animation to what is in stylesheet
+          element.style.animation = '';
+          element.children[0].style.animation = '';
+          // Using miliseconds to get more variance in animation
+          speedVertical = randomise(4000, 7000, 'ms');
+          speedHorizontal = randomise(1000, 3000, 'ms');
+          distanceHorizontal = randomise(1, 4, null);
+          // Add styles and emoji data
+          element.style.animationDuration = speedVertical;
+          element.children[0].style.animationDuration = speedHorizontal;
+          element.children[0].style.animationName = 'leftRight' + distanceHorizontal;
+          element.children[0].children[0].setAttribute("data-emoji", emoji);
+        }
+        function resetEmoji() {
+          // Make the element available for use
+          this.classList.add('paused');
+          // Strip the animation (this is required for a 'reset')
+          this.style.animation = 'none';
+          this.children[0].style.animation = 'none';
+        }
+        function randomise(min, max, type) {
+          return Math.floor(Math.random() * (max - min + 1) ) + min + type;
+        }
+        // Firebase business
+        const firestore = firebase.firestore();
+        const settings = { timestampsInSnapshots: true };
+        firestore.settings(settings);
+        firestore.collection('reactions').where('ts', '>=', Date.now()).onSnapshot(function(snapshot) {
+          snapshot.docChanges().forEach(function(change) {
+            if (change.type === 'added') {
+              // Get the paused elements
+              emojiElements = emojiContainer.getElementsByClassName('paused');
+              if (emojiElements.length > 0){
+                // Get the first paused element
+                emojiElement = emojiElements[0];
+                setEmoji(emojiElement, change.doc.data().emoji);
+              } else {
+                console.log('Too much spam!');
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

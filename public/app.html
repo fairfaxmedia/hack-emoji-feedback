@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Emoji Feedback</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//unpkg.com/swiper@4.4.1/dist/css/swiper.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script defer src="/__/firebase/5.5.8/firebase-app.js"></script>
+    <script defer src="/__/firebase/5.5.8/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.5.8/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <script defer src="//unpkg.com/swiper@4.4.1/dist/js/swiper.js"></script>
+  </head>
+  <body class="australia">
+    <h1>Emoji Feedback</h1>
+    <img id="spooky-web" alt="Spooky Web" src="/img/web.gif" />
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div id="emoji" class="swiper-slide">
+          <!-- <h2>Send emoji to the presenter</h2> -->
+          <hr />
+          <div class="emoji-container">
+            <!-- Australia icons -->
+            <div class="australia">
+              <a class="emoji-button swiper-no-swiping" data-emoji="👍">
+                <img
+                  class="emoji"
+                  alt="Thumbs up"
+                  src="/img/emoji-thumbsup.svg"
+                />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="👏">
+                <img class="emoji" alt="Clap" src="/img/emoji-clap.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="❤️">
+                <img class="emoji" alt="Heart" src="/img/emoji-heart.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🎉">
+                <img class="emoji" alt="Tada" src="/img/emoji-tada.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🏖">
+                <img class="emoji" alt="Beach" src="/img/emoji-beach.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🍺">
+                <img class="emoji" alt="Beer" src="/img/emoji-beer.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🇦🇺">
+                <img class="emoji" alt="Flag" src="/img/emoji-flag.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🦘">
+                <img
+                  class="emoji"
+                  alt="Kangaroo"
+                  src="/img/emoji-kangaroo.svg"
+                />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🐨">
+                <img class="emoji" alt="Koala" src="/img/emoji-koala.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🥧">
+                <img class="emoji" alt="Pie" src="/img/emoji-pie.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🦐">
+                <img class="emoji" alt="Shrimp" src="/img/emoji-shrimp.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🕷">
+                <img class="emoji" alt="Spider" src="/img/emoji-spider.svg" />
+              </a>
+            </div>
+            <!-- Spooky icons -->
+            <div class="spooky">
+              <a class="emoji-button swiper-no-swiping" data-emoji="🧟">
+                <img class="emoji" alt="Zombie" src="/img/emoji-zombie.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🎃">
+                <img
+                  class="emoji"
+                  alt="Jack-O-Lantern"
+                  src="/img/emoji-jack-o-lantern.svg"
+                />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🕷️">
+                <img class="emoji" alt="Spider" src="/img/emoji-spider.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="⚰️">
+                <img class="emoji" alt="Coffin" src="/img/emoji-coffin.svg" />
+              </a>
+            </div>
+            <!-- Regular icons -->
+            <div class="default">
+              <a class="emoji-button swiper-no-swiping" data-emoji="👍">
+                <img
+                  class="emoji"
+                  alt="Thumbs up"
+                  src="/img/emoji-thumbsup.svg"
+                />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="👏">
+                <img class="emoji" alt="Clap" src="/img/emoji-clap.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="❤️">
+                <img class="emoji" alt="Heart" src="/img/emoji-heart.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="🎉">
+                <img class="emoji" alt="Tada" src="/img/emoji-tada.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="💰">
+                <img
+                  class="emoji"
+                  alt="Moneybag"
+                  src="/img/emoji-moneybag.svg"
+                />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="😮">
+                <img
+                  class="emoji"
+                  alt="Open mouth"
+                  src="/img/emoji-openmouth.svg"
+                />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="😂">
+                <img class="emoji" alt="Joy" src="/img/emoji-joy.svg" />
+              </a>
+              <a class="emoji-button swiper-no-swiping" data-emoji="❓">
+                <img
+                  class="emoji"
+                  alt="Question"
+                  src="/img/emoji-question.svg"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div id="slido" class="swiper-slide">
+          <h2>Open Sli.do in a new tab</h2>
+          <hr />
+          <a
+            class="btn btn-outline"
+            href="https://app.sli.do/?search=ptshow"
+            target="_blank"
+            >Open sli.do</a
+          >
+        </div>
+        <!-- <div id="feedback" class="swiper-slide">
+          <h2>Send feedback to the presenter</h2>
+          <hr>
+          <p>This opt-in feature is coming soon!</p>
+        </div> -->
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div id="notifications-wrapper"><div id="notifications"></div></div>
+    <div id="instructions">
+      <img alt="Swipe" src="/img/icon-hand.svg" />
+      <p>Swipe to navigate</p>
+    </div>
+    <a id="logout" class="btn btn-outline">Log out</a>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Redirect if not logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (!user) {
+            window.location = "bye.html";
+          } else {
+            // NOTE: We need to put everything else here, otherwise we'll have issues getting user info
+            // Credit: https://stackoverflow.com/a/37901056
+            // Setup Firestore
+            const firestore = firebase.firestore();
+            const settings = { timestampsInSnapshots: true };
+            firestore.settings(settings);
+            // Add user info to DB (as we can't look up the user info without admin SDK)
+            firestore
+              .collection("users")
+              .doc(user.uid)
+              .set({
+                displayName: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL
+              })
+              .catch(function(error) {
+                console.error("Error adding document: ", error);
+              });
+            // Click event
+            document.querySelectorAll(".emoji-button").forEach(el =>
+              el.addEventListener("click", function() {
+                sendEmoji(
+                  this.dataset.emoji,
+                  Date.now(),
+                  firebase.auth().currentUser.uid
+                );
+              })
+            );
+            // Send emoji to Firestore
+            function sendEmoji(emoji, ts, uid) {
+              firestore
+                .collection("reactions")
+                .add({
+                  emoji: emoji,
+                  ts: ts,
+                  uid: uid
+                })
+                .then(function(docRef) {
+                  // Uncomment for debugging
+                  // console.log('Document written with ID: ', docRef.id);
+                })
+                .catch(function(error) {
+                  console.error("Error adding document: ", error);
+                });
+            }
+            // Listen for changes and display notification
+            firestore
+              .collection("reactions")
+              .where("ts", ">=", Date.now())
+              .onSnapshot(function(snapshot) {
+                snapshot.docChanges().forEach(function(change) {
+                  if (change.type === "added") {
+                    // Only proceed if the change wasn't made by current user
+                    if (
+                      change.doc.data().uid !== firebase.auth().currentUser.uid
+                    ) {
+                      firestore
+                        .collection("users")
+                        .doc(change.doc.data().uid)
+                        .get()
+                        .then(function(doc) {
+                          if (doc.exists) {
+                            messageDiv = document.createElement("div");
+                            messageDiv.innerHTML =
+                              change.doc.data().emoji +
+                              '<img src="' +
+                              doc.data().photoURL +
+                              '">' +
+                              doc.data().displayName;
+                            messageDiv.addEventListener(
+                              "webkitAnimationEnd",
+                              removeNotification
+                            );
+                            document
+                              .getElementById("notifications")
+                              .appendChild(messageDiv);
+                          } else {
+                            console.log("No such document!");
+                          }
+                        })
+                        .catch(function(error) {
+                          console.log("Error getting document:", error);
+                        });
+                    }
+                  }
+                });
+              });
+          }
+        });
+        function removeNotification() {
+          this.remove();
+          this.removeEventListener(
+            "webkitAnimationEnd",
+            removeNotification,
+            false
+          );
+        }
+        // Log out button
+        document.getElementById("logout").addEventListener("click", logOut);
+        function logOut() {
+          firebase.auth().signOut();
+        }
+        // Swiper setup
+        var mySwiper = new Swiper(".swiper-container", {
+          grabCursor: true,
+          // loop: true,
+          pagination: {
+            el: ".swiper-pagination"
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

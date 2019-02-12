@@ -1,0 +1,439 @@
+$colour-red: #de5b49;
+$colour-blue: #324d5c;
+$colour-lightblue: #46b29d;
+$colour-offwhite: #eee9d1;
+$colour-spooky-purple: #5f4a8b;
+$colour-spooky-black: #262626;
+$colour-spooky-orange: #f7931e;
+$width-gutter: 20px;
+
+// Reboot
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Main
+body {
+  background: $colour-red;
+  color: $colour-offwhite;
+  font-size: 18px;
+  line-height: 1.42857143;
+  margin: 0;
+  height: 100vh; // for centering loading spinner
+
+  .spooky,
+  .australia {
+    display: none;
+  }
+}
+
+// Halloween
+// Just add `class="spooky"` to body
+body.spooky {
+  background: $colour-spooky-purple;
+
+  .swiper-slide {
+    &#slido {
+      background: $colour-spooky-black;
+    }
+  }
+
+  .emoji-container {
+    .spooky {
+      display: grid;
+    }
+    .default,
+    .australia {
+      display: none;
+    }
+  }
+
+  .emoji-button {
+    background-color: $colour-spooky-black;
+    &:hover:active {
+      background-color: $colour-spooky-orange !important;
+    }
+  }
+  #spooky-web {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    width: 40%;
+    pointer-events: none;
+  }
+}
+#spooky-web {
+  display: none;
+}
+
+// Australia
+body.australia {
+  background: linear-gradient(-132deg, #069584 0%, #dce35b 100%);
+  background-attachment: fixed;
+
+  .swiper-slide {
+    &#slido {
+      background-image: linear-gradient(-132deg, #069584 0%, #dce35b 100%);
+    }
+  }
+
+  .emoji-container {
+    .australia {
+      display: grid;
+    }
+    .default,
+    .spooky {
+      display: none;
+    }
+  }
+
+  .emoji-button {
+    background-color: rgba(38, 38, 38, 0.5);
+
+    &:hover:active {
+      background-color: rgba(38, 38, 38, 1);
+    }
+  }
+
+  #notifications-wrapper:after {
+    background: transparent;
+  }
+}
+
+// Swiper
+.swiper-slide {
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 60px $width-gutter;
+  position: relative;
+  &#slido {
+    background: $colour-lightblue;
+  }
+  &#feedback {
+    background: $colour-blue;
+  }
+}
+
+.swiper-wrapper {
+  will-change: transform;
+}
+
+.swiper-pagination {
+  position: fixed;
+  bottom: 30px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: $colour-offwhite;
+}
+
+// Type
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+}
+
+h5,
+h6 {
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  padding: 30px 0 5px;
+}
+
+a {
+  color: $colour-offwhite;
+  &:hover,
+  &:active {
+    color: $colour-offwhite;
+  }
+}
+
+// Fixed elements
+#logout {
+  position: fixed;
+  z-index: 2;
+  right: $width-gutter;
+  bottom: $width-gutter;
+  margin: 0;
+}
+
+#instructions {
+  position: fixed;
+  z-index: 2;
+  bottom: 50px;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  text-align: center;
+  pointer-events: none;
+  animation: fade-out 1s;
+  animation-delay: 4s;
+  animation-fill-mode: forwards;
+  img {
+    width: 50px;
+    padding-bottom: 20px;
+    animation: swipe-horizontal 2s infinite;
+  }
+}
+
+// Notifications
+#notifications-wrapper {
+  position: fixed;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 20vh;
+  bottom: 70px;
+  left: 0;
+  padding: 0 $width-gutter;
+  z-index: -1;
+}
+
+#notifications div {
+  flex-shrink: 0;
+  overflow: hidden;
+  transform-origin: left center;
+  animation: fade-in-out 3s;
+  // animation-delay: 2s;
+  animation-fill-mode: forwards;
+  img {
+    width: 24px;
+    border-radius: 50%;
+    padding: 0 4px 0 2px;
+    vertical-align: middle;
+    margin-top: -5px;
+  }
+}
+
+// Animations
+@keyframes swipe-horizontal {
+  0% {
+    transform: translateX(-20px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    height: 0;
+    margin-top: 0;
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  20% {
+    opacity: 1;
+    height: 25px;
+    margin-top: 0;
+    transform: scale(1.05);
+  }
+  80% {
+    opacity: 1;
+    height: 25px;
+    margin-top: 0;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    height: 50px;
+    margin-top: -25px;
+  }
+}
+
+// UI elements
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  user-select: none;
+  background-image: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  outline: 0;
+  cursor: pointer;
+  text-decoration: none;
+  background: transparent;
+  border-color: $colour-offwhite;
+  color: $colour-offwhite;
+  border: 1px solid;
+  border-radius: 6px;
+}
+
+hr {
+  opacity: 0;
+  max-width: 127px;
+  margin: 0;
+  border: 0;
+  height: 2px;
+  background: #eee9d1;
+  margin-bottom: 60px;
+}
+
+// Emoji icons
+.emoji-container > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: $width-gutter;
+  justify-items: center;
+  align-items: center;
+}
+.emoji-container {
+  .australia,
+  .spooky {
+    display: none;
+  }
+}
+
+.emoji-button {
+  display: block;
+  width: 100%;
+  height: 0;
+  min-width: 50px;
+  min-height: 50px;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  background-color: $colour-blue;
+  img {
+    transform: translate(50%, 50%);
+    width: 50%;
+  }
+  &:hover:active {
+    background-color: $colour-lightblue;
+    outline: none;
+  }
+}
+
+// Loading spinner
+.lds-default {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lds-default div {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: $colour-offwhite;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 29px;
+  left: 53px;
+}
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 18px;
+  left: 50px;
+}
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 9px;
+  left: 41px;
+}
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 6px;
+  left: 29px;
+}
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 9px;
+  left: 18px;
+}
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 18px;
+  left: 9px;
+}
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 29px;
+  left: 6px;
+}
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 41px;
+  left: 9px;
+}
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 50px;
+  left: 18px;
+}
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 53px;
+  left: 29px;
+}
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 50px;
+  left: 41px;
+}
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 41px;
+  left: 50px;
+}
+@keyframes lds-default {
+  0%,
+  20%,
+  80%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}

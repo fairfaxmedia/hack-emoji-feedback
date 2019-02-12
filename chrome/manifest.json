@@ -1,0 +1,25 @@
+{
+  "name": "Feedback Overlay",
+  "version": "0.2",
+  "description": "Display reactions over a google presentation",
+  "icons": {
+    "128": "images/128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources" : [
+    "style.css",
+    "overlay.js"
+  ],
+  "content_scripts": [{
+    "matches": ["https://docs.google.com/presentation*/present*"],
+    "css": ["style.css"],
+    "js": ["content.js"],
+    "all_frames": true,
+    "run_at": "document_end"
+  }],
+  "manifest_version": 2
+}

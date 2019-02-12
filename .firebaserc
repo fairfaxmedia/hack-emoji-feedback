@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "hack-v1"
+  },
+  "targets": {
+    "hack-v1": {
+      "hosting": {
+        "reactions": [
+          "reactions"
+        ]
+      }
+    }
+  }
+}
